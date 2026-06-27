@@ -1,23 +1,35 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>PsyFlow</title>
-  <script>
-    const params = new URLSearchParams(window.location.search);
-    const code = params.get('code');
-    const name = params.get('name');
-    if (code) {
-      window.location = 'psyflow://invite?code=' + code + '&name=' + (name || '');
-    }
-  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PsyFlow — Unirse</title>
+  <style>
+    body{font-family:sans-serif;text-align:center;padding:40px 20px;background:#FAF7F2;color:#333;margin:0}
+    .code{font-size:36px;font-weight:bold;color:#C97B5A;letter-spacing:6px;margin:24px 0;padding:16px;background:#FFF3EE;border-radius:12px}
+    .card{background:white;border-radius:16px;padding:32px;max-width:400px;margin:0 auto;box-shadow:0 2px 12px rgba(0,0,0,0.08)}
+    h2{color:#C97B5A;margin-top:0}
+    .sub{color:#888;font-size:14px;margin-top:24px}
+  </style>
 </head>
 <body>
-  <h2>Abriendo PsyFlow...</h2>
-  <p>Si no se abre automáticamente, ingresa el código <strong id="code"></strong> en la app.</p>
+  <div class="card">
+    <h2>PsyFlow</h2>
+    <p>Tu terapeuta te invita a unirte.</p>
+    <p><strong>Ingresa este código en la app:</strong></p>
+    <div class="code" id="code">---</div>
+    <p class="sub">Si tienes la app instalada, se abrirá automáticamente en unos segundos.</p>
+  </div>
   <script>
-    document.getElementById('code').textContent = 
-      new URLSearchParams(window.location.search).get('code') || '';
+    const p = new URLSearchParams(window.location.search);
+    const code = p.get('code');
+    const name = p.get('name');
+    if (code) {
+      document.getElementById('code').textContent = code;
+      setTimeout(() => {
+        window.location = 'psyflow://invite?code=' + code + '&name=' + (name||'');
+      }, 1500);
+    }
   </script>
 </body>
 </html>
