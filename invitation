@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>PsyFlow</title>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get('code');
+    const name = params.get('name');
+    if (code) {
+      window.location = 'psyflow://invite?code=' + code + '&name=' + (name || '');
+    }
+  </script>
+</head>
+<body>
+  <h2>Abriendo PsyFlow...</h2>
+  <p>Si no se abre automáticamente, ingresa el código <strong id="code"></strong> en la app.</p>
+  <script>
+    document.getElementById('code').textContent = 
+      new URLSearchParams(window.location.search).get('code') || '';
+  </script>
+</body>
+</html>
